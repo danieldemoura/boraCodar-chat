@@ -2,6 +2,7 @@ const chat = {
     headerTime: document.querySelector("#header-time"),
     sectionSender: document.querySelector(".sender"),
     message: document.querySelector(".sender blockquote"),
+    buttonBackPage: document.querySelector("#close"),
     button: document.querySelector("#message-box button"),
     textArea: document.querySelector("textarea"),
     body: document.querySelector("body"),
@@ -29,10 +30,18 @@ const chat = {
     },
     addTimeInTheMessage: function() {
         return `${String(chat.hours).padStart(2, "0")}:${String(chat.minuts).padStart(2, "0")}`       
+    }, 
+    backPage: function() {
+        const mobile = window.innerWidth <= 768
+        
+        if(mobile) {
+            window.history.back()
+        }
     },   
     start: function() {
         chat.textArea.addEventListener("input", chat.expandTextArea)
         chat.textArea.addEventListener("blur", chat.retractTextArea)
+        chat.buttonBackPage.addEventListener("click", chat.backPage)
         chat.button.addEventListener("click", user.sendMessage)
         chat.scrollOfTheFinalPosition()
 
